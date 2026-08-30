@@ -24,8 +24,8 @@ const profile = {
 }
 
 const metrics = [
-  { value: '6+', label: '年视觉设计经验' },
-  { value: '3', label: '段科技行业经历' },
+  { value: '6+', label: '年渲染视觉设计经验' },
+  { value: '多品类', label: '消费电子与个护项目' },
   { value: '全链路', label: '渲染到电商落地' },
   { value: '多场景', label: '主图 / 详情 / 活动 / 品牌' },
 ]
@@ -535,9 +535,10 @@ const flatWhiteFiles = [
   '/assets/flat-white-13.jpg',
   '/assets/flat-white-14.jpg',
   '/assets/flat-white-15.png',
-  '/assets/flat-white-16.jpg',
+  '/assets/flat-white-16.png',
   '/assets/flat-white-17.jpg',
   '/assets/flat-white-18.jpg',
+  '/assets/flat-white-19.jpg',
 ]
 
 const flatSceneFiles = [
@@ -558,19 +559,19 @@ const flatSceneFiles = [
   '/assets/flat-scene-15.jpg',
   '/assets/flat-scene-16.png',
   '/assets/flat-scene-17.jpg',
-  '/assets/flat-scene-18.jpg',
-  '/assets/flat-scene-19.jpg',
+  '/assets/flat-scene-18.png',
+  '/assets/flat-scene-19.png',
   '/assets/flat-scene-20.jpg',
-  '/assets/flat-scene-21.png',
+  '/assets/flat-scene-21.jpg',
   '/assets/flat-scene-22.jpg',
-  '/assets/flat-scene-23.jpg',
+  '/assets/flat-scene-23.png',
   '/assets/flat-scene-24.jpg',
   '/assets/flat-scene-25.jpg',
   '/assets/flat-scene-26.jpg',
   '/assets/flat-scene-27.jpg',
   '/assets/flat-scene-28.jpg',
-  '/assets/flat-scene-29.png',
-  '/assets/flat-scene-30.png',
+  '/assets/flat-scene-29.jpg',
+  '/assets/flat-scene-30.jpg',
   '/assets/flat-scene-31.png',
   '/assets/flat-scene-32.png',
   '/assets/flat-scene-33.png',
@@ -578,6 +579,9 @@ const flatSceneFiles = [
   '/assets/flat-scene-35.png',
   '/assets/flat-scene-36.png',
   '/assets/flat-scene-37.png',
+  '/assets/flat-scene-38.png',
+  '/assets/flat-scene-39.png',
+  '/assets/flat-scene-40.png',
 ]
 
 const flatDetailFiles = [
@@ -674,7 +678,7 @@ const motionWorks = [
     text: '新增产品动画作品，补充产品动态展示与传播素材。',
   },
   {
-    title: '英文版产品动画',
+    title: 'NC01 产品动画',
     slug: 'motion-en',
     tag: 'Motion Version',
     video: '/assets/motion-new-en.mp4',
@@ -682,7 +686,7 @@ const motionWorks = [
     text: '新增英文版动态作品，适合海外传播和多语言物料展示。',
   },
   {
-    title: '日文版产品动画',
+    title: 'TB-PRO 产品动画',
     slug: 'motion-jp',
     tag: 'Motion Version',
     video: '/assets/motion-new-jp.mp4',
@@ -725,13 +729,13 @@ const toolIcons = [
 ]
 
 const galleryItems = [
-  { image: '/assets/work-earhook-render.png', label: 'Earhook Render 01', slug: 'earhook-render' },
-  { image: '/assets/work-earphone-exploded.png', label: 'Structure Visual 02', slug: 'earphone-exploded' },
-  { image: '/assets/work-scene-car.png', label: 'Scene Design 03', slug: 'car-scene' },
-  { image: '/assets/work-desk-scene.jpg', label: 'Desk Visual 04', slug: 'desk-scene' },
-  { image: '/assets/work-tech-product.jpg', label: 'Tech Product 05', slug: 'desk-scene' },
-  { image: '/assets/work-mc02-green.jpg', label: 'Material Render 06', slug: 'mc02-green' },
-  { image: '/assets/work-glow-earphone.jpg', label: 'Audio Render 07', slug: 'glow-earphone' },
+  { image: '/assets/flat-scene-10.jpg', label: 'Scene Visual 10', slug: 'scene-10' },
+  { image: '/assets/flat-scene-11.jpg', label: 'Scene Visual 11', slug: 'scene-11' },
+  { image: '/assets/flat-scene-12.jpg', label: 'Scene Visual 12', slug: 'scene-12' },
+  { image: '/assets/flat-scene-20.jpg', label: 'Scene Visual 20', slug: 'scene-20' },
+  { image: '/assets/flat-scene-21.jpg', label: 'Scene Visual 21', slug: 'scene-21' },
+  { image: '/assets/flat-scene-22.jpg', label: 'Scene Visual 22', slug: 'scene-22' },
+  { image: '/assets/flat-scene-39.png', label: 'Scene Visual 39', slug: 'scene-39' },
 ]
 
 const workPages = [
@@ -925,11 +929,11 @@ function Hero({ onOpenWork }) {
           <aside className="heroStats" aria-label="项目数据">
             <div>
               <strong>6+</strong>
-              <span>年视觉设计经验</span>
+              <span>年渲染视觉设计经验</span>
             </div>
             <div>
-              <strong>3</strong>
-              <span>段科技行业经历</span>
+              <strong>多品类</strong>
+              <span>消费电子与个护项目</span>
             </div>
           </aside>
         </div>
@@ -1073,7 +1077,7 @@ function About() {
 
       <div className="shell aboutGrid reveal">
         <div className="portraitWrap">
-          <img src="/assets/portrait.png" alt="Keyson 视觉设计师肖像视觉" />
+          <img src="/assets/keyson-avatar.png" alt="Keyson 个人头像插画" />
         </div>
         <div className="aboutContent">
           <p className="sectionKicker">About Me</p>
@@ -1237,12 +1241,10 @@ function MotionWorks() {
             onMouseLeave={handlePause}
           />
           <div className="motionMeta">
-            <small>{motionWorks[0].tag}</small>
             <strong>{motionWorks[0].title}</strong>
           </div>
         </a>
         <div className="featuredCopy">
-          <span>03 / Motion Works</span>
           <h3>用动态镜头讲清产品价值</h3>
           <p>{motionWorks[0].text}</p>
           <a href={`#work/${motionWorks[0].slug}`} onClick={() => saveReturnPosition('#motion')}>
@@ -1270,7 +1272,6 @@ function MotionWorks() {
               onMouseLeave={handlePause}
             />
             <div className="motionMeta">
-              <small>{work.tag}</small>
               <strong>{work.title}</strong>
               <p>{work.text}</p>
             </div>
@@ -1313,7 +1314,7 @@ function WorkDetail({ work }) {
         <header className="detailGalleryHead">
           <p className="sectionKicker">{work.type === 'video' ? 'Motion Detail' : 'Work Detail'}</p>
           <h1>{work.title}</h1>
-          <span>{work.categoryLabel || work.tag}</span>
+          {work.type !== 'video' && <span>{work.categoryLabel}</span>}
         </header>
         <div className="detailMediaWrap">
           {work.type === 'video' ? (
