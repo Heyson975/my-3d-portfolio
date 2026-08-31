@@ -11,3 +11,6 @@ dist/
 详情页/
 作品预览拼图.jpg
 reference-5179.*
+
+.vercel
+.env*
