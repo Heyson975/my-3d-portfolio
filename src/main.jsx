@@ -729,13 +729,15 @@ const toolIcons = [
 ]
 
 const galleryItems = [
+  { image: '/assets/flat-scene-08.jpg', label: 'Scene Visual 08', slug: 'scene-08' },
   { image: '/assets/flat-scene-10.jpg', label: 'Scene Visual 10', slug: 'scene-10' },
-  { image: '/assets/flat-scene-11.jpg', label: 'Scene Visual 11', slug: 'scene-11' },
-  { image: '/assets/flat-scene-12.jpg', label: 'Scene Visual 12', slug: 'scene-12' },
-  { image: '/assets/flat-scene-20.jpg', label: 'Scene Visual 20', slug: 'scene-20' },
-  { image: '/assets/flat-scene-21.jpg', label: 'Scene Visual 21', slug: 'scene-21' },
   { image: '/assets/flat-scene-22.jpg', label: 'Scene Visual 22', slug: 'scene-22' },
+  { image: '/assets/flat-scene-23.png', label: 'Scene Visual 23', slug: 'scene-23' },
+  { image: '/assets/flat-scene-24.jpg', label: 'Scene Visual 24', slug: 'scene-24' },
+  { image: '/assets/flat-scene-25.jpg', label: 'Scene Visual 25', slug: 'scene-25' },
+  { image: '/assets/flat-scene-26.jpg', label: 'Scene Visual 26', slug: 'scene-26' },
   { image: '/assets/flat-scene-39.png', label: 'Scene Visual 39', slug: 'scene-39' },
+  { image: '/assets/flat-scene-40.png', label: 'Scene Visual 40', slug: 'scene-40' },
 ]
 
 const workPages = [
