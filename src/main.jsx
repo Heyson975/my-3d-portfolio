@@ -238,14 +238,14 @@ const strengths = [
   },
 ]
 
-const heroSkills = ['C4D', 'Ps', 'Ai', 'Ae', 'Pr']
+const heroSkills = ['C4D', 'Ps', 'Ai', 'Ae', 'AIGC']
 
 const toolIcons = [
   { name: 'C4D', label: 'Cinema 4D' },
   { name: 'Ps', label: 'Photoshop' },
   { name: 'Ai', label: 'Illustrator' },
   { name: 'Ae', label: 'After Effects' },
-  { name: 'Pr', label: 'Premiere Pro' },
+  { name: 'AIGC', label: 'AI Workflow' },
 ]
 
 const galleryItems = [
