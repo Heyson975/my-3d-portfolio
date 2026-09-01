@@ -52,62 +52,70 @@ const experiences = [
 ]
 
 const flatWhiteFiles = [
-  '/assets/flat-white-01.jpg',
-  '/assets/flat-white-02.png',
-  '/assets/flat-white-03.jpg',
-  '/assets/flat-white-04.png',
-  '/assets/flat-white-05.png',
-  '/assets/flat-white-06.jpg',
-  '/assets/flat-white-07.jpg',
-  '/assets/flat-white-08.jpg',
+  '/assets/flat-white-01.webp',
+  '/assets/flat-white-02.webp',
+  '/assets/flat-white-03.webp',
+  '/assets/flat-white-04.webp',
+  '/assets/flat-white-05.webp',
+  '/assets/flat-white-06.webp',
+  '/assets/flat-white-07.webp',
+  '/assets/flat-white-08.webp',
+  '/assets/flat-white-09.webp',
+  '/assets/flat-white-10.webp',
 ]
 
 const flatSceneFiles = [
-  '/assets/flat-scene-01.jpg',
-  '/assets/flat-scene-02.jpg',
-  '/assets/flat-scene-03.jpg',
-  '/assets/flat-scene-04.jpg',
-  '/assets/flat-scene-05.jpg',
-  '/assets/flat-scene-06.jpg',
-  '/assets/flat-scene-07.jpg',
-  '/assets/flat-scene-08.jpg',
-  '/assets/flat-scene-09.png',
-  '/assets/flat-scene-10.jpg',
-  '/assets/flat-scene-11.jpg',
-  '/assets/flat-scene-12.jpg',
-  '/assets/flat-scene-13.png',
-  '/assets/flat-scene-14.jpg',
-  '/assets/flat-scene-15.png',
-  '/assets/flat-scene-16.jpg',
-  '/assets/flat-scene-17.png',
-  '/assets/flat-scene-18.png',
-  '/assets/flat-scene-19.jpg',
-  '/assets/flat-scene-20.jpg',
-  '/assets/flat-scene-21.jpg',
-  '/assets/flat-scene-22.png',
-  '/assets/flat-scene-23.jpg',
-  '/assets/flat-scene-24.jpg',
-  '/assets/flat-scene-25.jpg',
-  '/assets/flat-scene-26.jpg',
-  '/assets/flat-scene-27.jpg',
-  '/assets/flat-scene-28.jpg',
-  '/assets/flat-scene-29.jpg',
-  '/assets/flat-scene-30.png',
-  '/assets/flat-scene-31.png',
-  '/assets/flat-scene-32.png',
-  '/assets/flat-scene-33.png',
-  '/assets/flat-scene-34.png',
-  '/assets/flat-scene-35.png',
-  '/assets/flat-scene-36.png',
-  '/assets/flat-scene-37.png',
-  '/assets/flat-scene-38.png',
-  '/assets/flat-scene-39.png',
+  '/assets/flat-scene-01.webp',
+  '/assets/flat-scene-02.webp',
+  '/assets/flat-scene-03.webp',
+  '/assets/flat-scene-04.webp',
+  '/assets/flat-scene-05.webp',
+  '/assets/flat-scene-06.webp',
+  '/assets/flat-scene-07.webp',
+  '/assets/flat-scene-08.webp',
+  '/assets/flat-scene-09.webp',
+  '/assets/flat-scene-10.webp',
+  '/assets/flat-scene-11.webp',
+  '/assets/flat-scene-12.webp',
+  '/assets/flat-scene-13.webp',
+  '/assets/flat-scene-14.webp',
+  '/assets/flat-scene-15.webp',
+  '/assets/flat-scene-16.webp',
+  '/assets/flat-scene-17.webp',
+  '/assets/flat-scene-18.webp',
+  '/assets/flat-scene-19.webp',
+  '/assets/flat-scene-20.webp',
+  '/assets/flat-scene-21.webp',
+  '/assets/flat-scene-22.webp',
+  '/assets/flat-scene-23.webp',
+  '/assets/flat-scene-24.webp',
+  '/assets/flat-scene-25.webp',
+  '/assets/flat-scene-26.webp',
+  '/assets/flat-scene-27.webp',
+  '/assets/flat-scene-28.webp',
+  '/assets/flat-scene-29.webp',
+  '/assets/flat-scene-30.webp',
+  '/assets/flat-scene-31.webp',
+  '/assets/flat-scene-32.webp',
+  '/assets/flat-scene-33.webp',
+  '/assets/flat-scene-34.webp',
+  '/assets/flat-scene-35.webp',
+  '/assets/flat-scene-36.webp',
+  '/assets/flat-scene-37.webp',
+  '/assets/flat-scene-38.webp',
+  '/assets/flat-scene-39.webp',
+  '/assets/flat-scene-40.webp',
+  '/assets/flat-scene-41.webp',
+  '/assets/flat-scene-42.webp',
+  '/assets/flat-scene-43.webp',
+  '/assets/flat-scene-44.webp',
 ]
 
 const flatDetailFiles = [
-  '/assets/flat-detail-01.jpg',
-  '/assets/flat-detail-02.jpg',
-  '/assets/flat-detail-03.jpg',
+  '/assets/flat-detail-01.webp',
+  '/assets/flat-detail-02.webp',
+  '/assets/flat-detail-03.webp',
+  '/assets/flat-detail-04.webp',
 ]
 
 const makeFolderWorks = (files, category, categoryLabel, titlePrefix, text) =>
@@ -162,7 +170,7 @@ const motionWorks = [
     slug: 'motion-glow-earphone',
     tag: 'Motion Render',
     video: '/assets/motion-glow-earphone.mp4',
-    poster: '/assets/motion-cover-glow.jpg',
+    poster: '/assets/motion-cover-glow.webp',
     text: '以光效、产品转场和材质细节建立新品传播中的动态记忆点。',
   },
   {
@@ -170,7 +178,7 @@ const motionWorks = [
     slug: 'motion-bc10',
     tag: 'Product Film',
     video: '/assets/motion-bc10.mp4',
-    poster: '/assets/motion-cover-bc10.jpg',
+    poster: '/assets/motion-cover-bc10.webp',
     text: '面向电商与内容平台的产品动态展示，突出外观、佩戴和核心卖点。',
   },
   {
@@ -178,7 +186,7 @@ const motionWorks = [
     slug: 'motion-i2',
     tag: 'E-commerce Motion',
     video: '/assets/motion-i2.mp4',
-    poster: '/assets/motion-cover-i2.jpg',
+    poster: '/assets/motion-cover-i2.webp',
     text: '通过简洁镜头语言呈现产品结构与系列感，适配详情页和短视频投放。',
   },
   {
@@ -186,7 +194,7 @@ const motionWorks = [
     slug: 'motion-zst',
     tag: 'Product Motion',
     video: '/assets/motion-zst.mp4',
-    poster: '/assets/motion-cover-zst.jpg',
+    poster: '/assets/motion-cover-zst.webp',
     text: 'ZST 系列产品动态展示。',
   },
   {
@@ -194,7 +202,7 @@ const motionWorks = [
     slug: 'motion-tbx',
     tag: 'Product Film',
     video: '/assets/motion-new-tbx.mp4',
-    poster: '/assets/work-scene-ca01-tc.jpg',
+    poster: '/assets/work-scene-ca01-tc.webp',
     text: '新增产品动画作品，补充产品动态展示与传播素材。',
   },
   {
@@ -202,7 +210,7 @@ const motionWorks = [
     slug: 'motion-en',
     tag: 'Motion Version',
     video: '/assets/motion-new-en.mp4',
-    poster: '/assets/work-scene-new-01.jpg',
+    poster: '/assets/work-scene-new-01.webp',
     text: '新增英文版动态作品，适合海外传播和多语言物料展示。',
   },
   {
@@ -210,7 +218,7 @@ const motionWorks = [
     slug: 'motion-jp',
     tag: 'Motion Version',
     video: '/assets/motion-new-jp.mp4',
-    poster: '/assets/work-scene-new-02.jpg',
+    poster: '/assets/work-scene-new-02.webp',
     text: '新增日文版动态作品，补充不同市场版本的动画展示。',
   },
 ]
@@ -249,15 +257,15 @@ const toolIcons = [
 ]
 
 const galleryItems = [
-  { image: '/assets/flat-scene-08.jpg', label: 'Scene Visual 08', slug: 'scene-08' },
-  { image: '/assets/flat-scene-10.jpg', label: 'Scene Visual 10', slug: 'scene-10' },
-  { image: '/assets/flat-scene-22.png', label: 'Scene Visual 22', slug: 'scene-22' },
-  { image: '/assets/flat-scene-23.jpg', label: 'Scene Visual 23', slug: 'scene-23' },
-  { image: '/assets/flat-scene-24.jpg', label: 'Scene Visual 24', slug: 'scene-24' },
-  { image: '/assets/flat-scene-25.jpg', label: 'Scene Visual 25', slug: 'scene-25' },
-  { image: '/assets/flat-scene-26.jpg', label: 'Scene Visual 26', slug: 'scene-26' },
-  { image: '/assets/flat-scene-38.png', label: 'Scene Visual 38', slug: 'scene-38' },
-  { image: '/assets/flat-scene-39.png', label: 'Scene Visual 39', slug: 'scene-39' },
+  { image: '/assets/flat-scene-08.webp', label: 'Scene Visual 08', slug: 'scene-08' },
+  { image: '/assets/flat-scene-40.webp', label: 'Scene Visual 40', slug: 'scene-40' },
+  { image: '/assets/flat-scene-18.webp', label: 'Scene Visual 18', slug: 'scene-18' },
+  { image: '/assets/flat-scene-25.webp', label: 'Scene Visual 25', slug: 'scene-25' },
+  { image: '/assets/flat-scene-26.webp', label: 'Scene Visual 26', slug: 'scene-26' },
+  { image: '/assets/flat-scene-27.webp', label: 'Scene Visual 27', slug: 'scene-27' },
+  { image: '/assets/flat-scene-28.webp', label: 'Scene Visual 28', slug: 'scene-28' },
+  { image: '/assets/flat-scene-36.webp', label: 'Scene Visual 36', slug: 'scene-36' },
+  { image: '/assets/flat-scene-37.webp', label: 'Scene Visual 37', slug: 'scene-37' },
 ]
 
 const workPages = [
@@ -410,7 +418,7 @@ function Hero({ onOpenWork }) {
         muted
         loop
         playsInline
-        poster="/assets/project-render.png"
+        poster="/assets/project-render.webp"
       />
       <div className="heroShade" />
       <div className="heroInner shell">
@@ -446,7 +454,12 @@ function Hero({ onOpenWork }) {
                 </span>
               ))}
             </div>
-            <img src="/assets/keyson-comic-clean.png" alt="Keyson 漫画 3D 人物主视觉" />
+            <img
+              src="/assets/keyson-comic-clean.webp"
+              alt="Keyson 漫画 3D 人物主视觉"
+              decoding="async"
+              fetchPriority="high"
+            />
           </div>
           <aside className="heroStats" aria-label="项目数据">
             <div>
@@ -576,7 +589,7 @@ function ArcGallery({ items, onOpenWork }) {
             onOpenWork(selectedWorks.find((selectedWork) => selectedWork.slug === item.slug))
           }}
         >
-          <img src={item.image} alt={item.label} />
+          <img src={item.image} alt={item.label} loading="lazy" decoding="async" />
           <span>{item.label}</span>
         </button>
       ))}
@@ -599,7 +612,7 @@ function About() {
 
       <div className="shell aboutGrid reveal">
         <div className="portraitWrap">
-          <img src="/assets/keyson-avatar.png" alt="Keyson 个人头像插画" />
+          <img src="/assets/keyson-avatar.webp" alt="Keyson 个人头像插画" loading="lazy" decoding="async" />
         </div>
         <div className="aboutContent">
           <p className="sectionKicker">About Me</p>
@@ -705,7 +718,7 @@ function FeaturedProjects({ onOpenWork }) {
               key={work.title}
               onClick={() => onOpenWork(work)}
             >
-              <img src={work.image} alt={work.title} />
+              <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
               <div className="workMeta">
                 <small>{work.categoryLabel}</small>
                 <strong>{work.title}</strong>
@@ -840,9 +853,9 @@ function WorkDetail({ work }) {
         </header>
         <div className="detailMediaWrap">
           {work.type === 'video' ? (
-            <video src={work.media} poster={work.image} controls autoPlay muted loop playsInline />
+            <video src={work.media} poster={work.image} controls autoPlay muted loop playsInline preload="metadata" />
           ) : (
-            <img src={work.media} alt={work.title} />
+            <img src={work.media} alt={work.title} loading="lazy" decoding="async" />
           )}
         </div>
       </div>
@@ -884,13 +897,13 @@ function MediaLightbox({ work, onClose }) {
           </aside>
           <div className="detailLightboxTrack">
             <figure className="detailPreviewColumn">
-              <img src={work.image} alt={work.title} />
+              <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
             </figure>
           </div>
         </div>
       ) : (
         <div className="imageLightboxStage">
-          <img src={work.image} alt={work.title} />
+          <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
           <span>{work.categoryLabel}</span>
           <strong>{work.title}</strong>
         </div>

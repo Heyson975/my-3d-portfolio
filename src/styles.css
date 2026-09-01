@@ -1144,15 +1144,17 @@ section {
 }
 
 .selectedGrid {
-  column-count: 4;
-  column-gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: 18px;
 }
 
 .selectedWorkTile {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
-  margin: 0 0 18px;
+  margin: 0;
   overflow: hidden;
   border: 1px solid rgba(164, 154, 255, 0.18);
   border-radius: 8px;
@@ -1185,6 +1187,7 @@ section {
 }
 
 .selectedWorkTile img {
+  display: block;
   width: 100%;
   height: auto;
   min-height: 180px;
@@ -1860,7 +1863,7 @@ section {
   }
 
   .selectedGrid {
-    column-count: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .strengthGrid {
@@ -2091,7 +2094,6 @@ section {
   .motionGrid {
     display: grid;
     grid-template-columns: 1fr;
-    column-count: unset;
     gap: 14px;
   }
 
