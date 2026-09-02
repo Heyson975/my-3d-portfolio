@@ -17,7 +17,7 @@ import './styles.css'
 const profile = {
   name: '梁锦熙',
   alias: 'Keyson',
-  roles: '视觉设计师 / AI 设计师 / 品牌设计师',
+  roles: '视觉设计师 / AI 设计师 / 渲染设计师',
   location: '广东 · 深圳',
   phone: '137-0220-7613',
   email: '462692311@qq.com',
