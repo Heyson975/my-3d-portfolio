@@ -55,7 +55,7 @@ const makeAssetFiles = (prefix, count, extension) =>
   Array.from({ length: count }, (_, index) => `/assets/${prefix}-${String(index + 1).padStart(2, '0')}.${extension}`)
 
 const flatWhiteFiles = makeAssetFiles('flat-white', 24, 'webp')
-const flatSceneFiles = makeAssetFiles('flat-scene', 45, 'webp')
+const flatSceneFiles = makeAssetFiles('flat-scene', 46, 'webp')
 const flatDetailFiles = makeAssetFiles('flat-detail', 5, 'jpg')
 
 const makeFolderWorks = (files, category, categoryLabel, titlePrefix, text) =>
