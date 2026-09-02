@@ -51,72 +51,12 @@ const experiences = [
   },
 ]
 
-const flatWhiteFiles = [
-  '/assets/flat-white-01.webp',
-  '/assets/flat-white-02.webp',
-  '/assets/flat-white-03.webp',
-  '/assets/flat-white-04.webp',
-  '/assets/flat-white-05.webp',
-  '/assets/flat-white-06.webp',
-  '/assets/flat-white-07.webp',
-  '/assets/flat-white-08.webp',
-  '/assets/flat-white-09.webp',
-  '/assets/flat-white-10.webp',
-]
+const makeAssetFiles = (prefix, count, extension) =>
+  Array.from({ length: count }, (_, index) => `/assets/${prefix}-${String(index + 1).padStart(2, '0')}.${extension}`)
 
-const flatSceneFiles = [
-  '/assets/flat-scene-01.webp',
-  '/assets/flat-scene-02.webp',
-  '/assets/flat-scene-03.webp',
-  '/assets/flat-scene-04.webp',
-  '/assets/flat-scene-05.webp',
-  '/assets/flat-scene-06.webp',
-  '/assets/flat-scene-07.webp',
-  '/assets/flat-scene-08.webp',
-  '/assets/flat-scene-09.webp',
-  '/assets/flat-scene-10.webp',
-  '/assets/flat-scene-11.webp',
-  '/assets/flat-scene-12.webp',
-  '/assets/flat-scene-13.webp',
-  '/assets/flat-scene-14.webp',
-  '/assets/flat-scene-15.webp',
-  '/assets/flat-scene-16.webp',
-  '/assets/flat-scene-17.webp',
-  '/assets/flat-scene-18.webp',
-  '/assets/flat-scene-19.webp',
-  '/assets/flat-scene-20.webp',
-  '/assets/flat-scene-21.webp',
-  '/assets/flat-scene-22.webp',
-  '/assets/flat-scene-23.webp',
-  '/assets/flat-scene-24.webp',
-  '/assets/flat-scene-25.webp',
-  '/assets/flat-scene-26.webp',
-  '/assets/flat-scene-27.webp',
-  '/assets/flat-scene-28.webp',
-  '/assets/flat-scene-29.webp',
-  '/assets/flat-scene-30.webp',
-  '/assets/flat-scene-31.webp',
-  '/assets/flat-scene-32.webp',
-  '/assets/flat-scene-33.webp',
-  '/assets/flat-scene-34.webp',
-  '/assets/flat-scene-35.webp',
-  '/assets/flat-scene-36.webp',
-  '/assets/flat-scene-37.webp',
-  '/assets/flat-scene-38.webp',
-  '/assets/flat-scene-39.webp',
-  '/assets/flat-scene-40.webp',
-  '/assets/flat-scene-41.webp',
-  '/assets/flat-scene-42.webp',
-  '/assets/flat-scene-43.webp',
-  '/assets/flat-scene-44.webp',
-]
-
-const flatDetailFiles = [
-  '/assets/flat-detail-01.webp',
-  '/assets/flat-detail-02.webp',
-  '/assets/flat-detail-03.webp',
-  '/assets/flat-detail-04.webp',
-]
+const flatWhiteFiles = makeAssetFiles('flat-white', 24, 'webp')
+const flatSceneFiles = makeAssetFiles('flat-scene', 45, 'webp')
+const flatDetailFiles = makeAssetFiles('flat-detail', 5, 'jpg')
 
 const makeFolderWorks = (files, category, categoryLabel, titlePrefix, text) =>
   files.map((image, index) => {
@@ -135,7 +75,7 @@ const folderWhiteWorks = makeFolderWorks(
   flatWhiteFiles,
   'white',
   '白底图',
-  '耳机白底图',
+  '白底图',
   '来自耳机文件夹的产品静态图，用于展示产品结构、材质和单品渲染。'
 )
 
@@ -285,6 +225,46 @@ const workPages = [
 ]
 
 const RETURN_POSITION_KEY = 'keysonPortfolioReturnPosition'
+
+function useResponsiveColumnCount() {
+  const getCount = () => {
+    if (window.innerWidth <= 760) return 1
+    if (window.innerWidth <= 1180) return 2
+    return 4
+  }
+
+  const [columnCount, setColumnCount] = useState(getCount)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setColumnCount(getCount())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return columnCount
+}
+
+function getWorkVisualWeight(work) {
+  if (work.category === 'detail') return 1.72
+  if (work.category === 'white') return 1.06
+  return 1 + (Number(work.slug.match(/\d+$/)?.[0] || 0) % 4) * 0.18
+}
+
+function makeMasonryColumns(works, columnCount) {
+  const columns = Array.from({ length: columnCount }, () => [])
+  const heights = Array.from({ length: columnCount }, () => 0)
+
+  works.forEach((work, index) => {
+    const targetIndex = index < columnCount ? index : heights.indexOf(Math.min(...heights))
+    columns[targetIndex].push(work)
+    heights[targetIndex] += getWorkVisualWeight(work)
+  })
+
+  return columns
+}
 
 function saveReturnPosition(fallbackHash) {
   sessionStorage.setItem(
@@ -681,8 +661,10 @@ function About() {
 function FeaturedProjects({ onOpenWork }) {
   const [activeFilter, setActiveFilter] = useState('all')
   const [expanded, setExpanded] = useState(false)
+  const columnCount = useResponsiveColumnCount()
   const filteredWorks = selectedWorks.filter((work) => activeFilter === 'all' || work.category === activeFilter)
   const visibleWorks = expanded ? filteredWorks : filteredWorks.slice(0, 8)
+  const workColumns = makeMasonryColumns(visibleWorks, columnCount)
 
   return (
     <section className="section projects" id="projects">
@@ -711,19 +693,22 @@ function FeaturedProjects({ onOpenWork }) {
           </div>
         </div>
         <div className="selectedGrid">
-          {visibleWorks.map((work, index) => (
-            <button
-              type="button"
-              className={`selectedWorkTile tile${index + 1}`}
-              key={work.title}
-              onClick={() => onOpenWork(work)}
-            >
-              <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
-              <div className="workMeta">
-                <small>{work.categoryLabel}</small>
-                <strong>{work.title}</strong>
+          {workColumns.map((column, columnIndex) => (
+            <div className="selectedColumn" key={`column-${columnIndex}`}>
+              {column.map((work) => (
+                <button
+                  type="button"
+                  className="selectedWorkTile"
+                  key={work.slug}
+                  onClick={() => onOpenWork(work)}
+                >
+                  <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
+                  <div className="workMeta">
+                    <strong>{work.title}</strong>
+                  </div>
+                </button>
+              ))}
               </div>
-            </button>
           ))}
         </div>
         {filteredWorks.length > 8 && (
@@ -882,6 +867,9 @@ function MediaLightbox({ work, onClose }) {
   if (!work) return null
 
   const isDetail = work.category === 'detail'
+  const detailSlices = isDetail
+    ? Array.from({ length: 6 }, (_, index) => work.image.replace(/\.jpg$/, `-slice-${String(index + 1).padStart(2, '0')}.jpg`))
+    : []
 
   return (
     <div className={`mediaLightbox ${isDetail ? 'isDetailLightbox' : ''}`} role="dialog" aria-modal="true">
@@ -896,9 +884,11 @@ function MediaLightbox({ work, onClose }) {
             <span>{work.categoryLabel}</span>
           </aside>
           <div className="detailLightboxTrack">
-            <figure className="detailPreviewColumn">
-              <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
-            </figure>
+            {detailSlices.map((image, index) => (
+              <figure className="detailPreviewColumn" key={image}>
+                <img src={image} alt={`${work.title} 第 ${index + 1} 屏`} loading="lazy" decoding="async" />
+              </figure>
+            ))}
           </div>
         </div>
       ) : (
