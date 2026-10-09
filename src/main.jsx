@@ -427,9 +427,9 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
 
 const earphoneProducts = [
   { ...makeEarphoneProduct('I2', 'i2', 8, 7), group: 'featured' },
-  { ...makeEarphoneProduct('NC01', 'nc01', 10, 6), group: 'featured' },
   { ...makeEarphoneProduct('发光耳机', 'glow', 6, 1), group: 'featured' },
   { ...makeEarphoneProduct('水饺', 'dumpling', 17, 7), cover: '/assets/project-earphone-dumpling-main-05.webp', group: 'featured' },
+  { ...makeEarphoneProduct('NC01', 'nc01', 10, 6), group: 'featured' },
   { ...makeEarphoneProduct('BC10', 'bc10', 13, 0), group: 'featured' },
   { ...makeEarphoneProduct('悟空', 'wukong', 8, 6), group: 'featured' },
   {
@@ -999,7 +999,7 @@ function About() {
             </div>
             <div>
               <span>服务方向</span>
-              <strong>Brand / 3D / AIGC</strong>
+              <strong>Graphic Design / 3D / AIGC</strong>
             </div>
             <div>
               <span>手机</span>
