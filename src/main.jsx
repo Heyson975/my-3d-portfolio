@@ -484,17 +484,29 @@ const lightingProducts = [
     title: '户外泛光灯',
     label: 'Outdoor Lighting',
     slug: 'outdoor',
-    cover: '/assets/flat-scene-31.webp',
-    description: '户外泛光灯的 A+ 场景应用与功能展示。',
-    sections: [makeProjectSection('A+', 'A+ Visuals', [31, 32, 33, 34, 35, 36, 37].map((number, index) => ({
-      title: `户外照明 A+ ${String(index + 1).padStart(2, '0')}`,
-      label: 'A+',
-      image: `/assets/flat-scene-${number}.webp`,
-    })))],
+    cover: '/assets/project-lighting-outdoor-main-02.webp',
+    description: '户外泛光灯的产品主图与电脑端、手机端 A+ 设计。',
+    sections: [
+      makeProjectSection('主图', 'Main Visuals', makeProductItems('project-lighting-outdoor-main', 7, '户外泛光灯主图')),
+      makeProjectSection('A+', 'Desktop A+ Visuals', makeProductItems('project-lighting-outdoor-aplus-desktop', 7, '户外泛光灯 A+')),
+      { ...makeProjectSection('手机端 A+', 'Mobile A+ Visuals', makeProductItems('project-lighting-outdoor-aplus-mobile', 7, '户外泛光灯手机端 A+')), variant: 'aPlus' },
+    ],
   },
 ]
 
 const otherProducts = [
+  {
+    title: '灯光设计方案', label: 'Lighting Design', slug: 'lighting-design',
+    cover: '/assets/project-lighting-design-main-02.webp',
+    description: '全屋灯光设计方案、空间效果与服务流程展示。',
+    sections: [
+      makeProjectSection('方案预览', 'Design Proposal', makeProductItems('project-lighting-design-main', 5, '灯光设计方案')),
+      {
+        title: '详情页', label: 'Detail Page', variant: 'detailColumns',
+        image: '/assets/project-lighting-design-detail-01.jpg', imageWidth: 790, imageHeight: 18802,
+      },
+    ],
+  },
   {
     title: '海报', label: 'Campaign Posters', slug: 'posters',
     cover: '/assets/flat-scene-22.webp',
@@ -1250,7 +1262,7 @@ function ProjectProductDetail({ parent, product }) {
           {backHash === '#projects' ? '返回项目' : `返回${parent.title}`}
           <ArrowUpRight size={18} />
         </a>
-        <header className="projectDetailHero">
+        <header className={`projectDetailHero${product.slug === 'lighting-design' ? ' isCompactTitle' : ''}`}>
           <div>
             <p className="sectionKicker">{parent.title}项目</p>
             <h1>{product.title}</h1>
@@ -1280,7 +1292,7 @@ function ProjectProductDetail({ parent, product }) {
                 <div className="projectPosterGallery">
                   <ProjectAPlusGallery works={section.works} label={`${product.title}海报`} />
                 </div>
-              ) : section.title === 'A+' ? (
+              ) : section.title === 'A+' || section.variant === 'aPlus' ? (
                 section.variant === 'splitAPlus'
                   ? <ProjectSplitAPlusGallery works={section.works} label={`${product.title} A+ 作品`} />
                   : <ProjectAPlusGallery works={section.works} label={`${product.title} A+ 作品`} />
