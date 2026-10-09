@@ -330,14 +330,6 @@ const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix, detai
 
 const aromaProducts = [
   {
-    title: '香砖',
-    label: 'Aroma Block',
-    slug: 'xiang',
-    cover: '/assets/project-aroma-xiang-main-04.webp',
-    description: '香砖产品白底图、场景主图与详情页。',
-    sections: makeProductSections('project-aroma-xiang', 8, 23400, '香砖', '/assets/project-aroma-xiang-detail-01.jpg', [0, 1, 2]),
-  },
-  {
     title: '160ml',
     label: '160ml Aroma',
     slug: '160ml',
@@ -360,6 +352,14 @@ const aromaProducts = [
     cover: '/assets/project-aroma-indoor-main-01.webp',
     description: '室内香薰产品主图与详情页。',
     sections: makeProductSections('project-aroma-indoor', 5, 22515, '室内香薰'),
+  },
+  {
+    title: '香砖',
+    label: 'Aroma Block',
+    slug: 'xiang',
+    cover: '/assets/project-aroma-xiang-main-04.webp',
+    description: '香砖产品白底图、场景主图与详情页。',
+    sections: makeProductSections('project-aroma-xiang', 8, 23400, '香砖', '/assets/project-aroma-xiang-detail-01.jpg', [0, 1, 2]),
   },
 ]
 
