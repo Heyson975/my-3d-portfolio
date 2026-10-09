@@ -395,7 +395,7 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
   ]
 
   if (detailCount) {
-    const detailPrefix = slug === 'i2' ? 'project-earphone-i2-aplus' : `${prefix}-detail`
+    const detailPrefix = slug === 'i2' ? 'project-earphone-i2-aplus-v2' : `${prefix}-detail`
     const detailWorks = makeProductItems(detailPrefix, detailCount, `${title} A+`, 'A+')
     const splitWorks = slug === 'glow'
       ? Array.from({ length: 7 }, (_, index) => ({
