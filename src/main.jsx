@@ -71,21 +71,36 @@ const makeFolderWorks = (files, category, categoryLabel, titlePrefix, text) =>
     }
   })
 
-const folderWhiteWorks = makeFolderWorks(
-  flatWhiteFiles,
-  'white',
-  '白底图',
-  '白底图',
-  '来自耳机文件夹的产品静态图，用于展示产品结构、材质和单品渲染。'
-)
+const whiteWorkGroups = [
+  { title: '耳机', numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 17, 18, 19, 20, 21, 22, 23, 24] },
+  { title: '香薰', numbers: [13, 14, 15, 16] },
+]
 
-const folderSceneWorks = makeFolderWorks(
-  flatSceneFiles,
-  'scene',
-  '场景图',
-  '场景图',
-  '来自场景图文件夹的视觉作品，用于展示产品在不同空间和营销场景中的表达。'
-)
+const sceneWorkGroups = [
+  { title: '耳机', numbers: [1, 2, 3, 8, 9, 12, 13, 14, 15, 16, 25, 26, 27, 28, 29, 30, 38, 39, 45, 46] },
+  { title: '制氧机', numbers: [4, 5, 6, 7] },
+  { title: '香薰', numbers: [10, 11, 20, 40, 41] },
+  { title: '洗衣机', numbers: [17, 18, 19] },
+  { title: '灯具', numbers: [21, 22, 23, 24, 31, 32, 33, 34, 35, 36, 37] },
+  { title: '显示设备', numbers: [42, 43, 44] },
+]
+
+const classifyFlatWorks = (files, type, groups) =>
+  files.map((image, index) => {
+    const number = index + 1
+    const group = groups.find((entry) => entry.numbers.includes(number))
+    return {
+      title: `${group.title}${type} ${String(number).padStart(2, '0')}`,
+      slug: `${type === '白底图' ? 'white' : 'scene'}-${String(number).padStart(2, '0')}`,
+      category: type === '白底图' ? 'white' : 'scene',
+      categoryLabel: group.title,
+      image,
+      text: `${group.title}产品${type}。`,
+    }
+  })
+
+const folderWhiteWorks = classifyFlatWorks(flatWhiteFiles, '白底图', whiteWorkGroups)
+const folderSceneWorks = classifyFlatWorks(flatSceneFiles, '场景图', sceneWorkGroups)
 
 const folderDetailWorks = makeFolderWorks(
   flatDetailFiles,
@@ -104,13 +119,37 @@ const workFilters = [
   { id: 'detail', label: '详情页' },
 ]
 
+const projectCategories = [
+  {
+    title: '耳机',
+    label: 'Audio Product',
+    slug: 'earphone',
+    cover: '/assets/project-earphone-bc10-main-01.webp',
+    description: '耳机白底图、产品主图与场景视觉。',
+  },
+  {
+    title: '香薰',
+    label: 'Aroma Visual',
+    slug: 'aroma',
+    cover: '/assets/project-aroma-160ml-main-01.webp',
+    description: '车载香薰、香膏产品与氛围化商业画面。',
+  },
+  {
+    title: '其他',
+    label: 'Other Works',
+    slug: 'other',
+    cover: '/assets/flat-scene-08.webp',
+    description: '制氧机、户外照明、海报与详情页作品。',
+  },
+]
+
 const motionWorks = [
   {
     title: '发光耳机动态主片',
     slug: 'motion-glow-earphone',
     tag: 'Motion Render',
     video: '/assets/motion-glow-earphone.mp4',
-    poster: '/assets/motion-cover-glow.webp',
+    poster: '/assets/motion-poster-glow.webp',
     text: '以光效、产品转场和材质细节建立新品传播中的动态记忆点。',
   },
   {
@@ -118,7 +157,7 @@ const motionWorks = [
     slug: 'motion-bc10',
     tag: 'Product Film',
     video: '/assets/motion-bc10.mp4',
-    poster: '/assets/motion-cover-bc10.webp',
+    poster: '/assets/motion-poster-bc10.webp',
     text: '面向电商与内容平台的产品动态展示，突出外观、佩戴和核心卖点。',
   },
   {
@@ -126,7 +165,7 @@ const motionWorks = [
     slug: 'motion-i2',
     tag: 'E-commerce Motion',
     video: '/assets/motion-i2.mp4',
-    poster: '/assets/motion-cover-i2.webp',
+    poster: '/assets/motion-poster-i2.webp',
     text: '通过简洁镜头语言呈现产品结构与系列感，适配详情页和短视频投放。',
   },
   {
@@ -134,7 +173,7 @@ const motionWorks = [
     slug: 'motion-zst',
     tag: 'Product Motion',
     video: '/assets/motion-zst.mp4',
-    poster: '/assets/motion-cover-zst.webp',
+    poster: '/assets/motion-poster-zst.webp',
     text: 'ZST 系列产品动态展示。',
   },
   {
@@ -142,7 +181,7 @@ const motionWorks = [
     slug: 'motion-tbx',
     tag: 'Product Film',
     video: '/assets/motion-new-tbx.mp4',
-    poster: '/assets/work-scene-ca01-tc.webp',
+    poster: '/assets/motion-poster-tbx.webp',
     text: '新增产品动画作品，补充产品动态展示与传播素材。',
   },
   {
@@ -150,7 +189,7 @@ const motionWorks = [
     slug: 'motion-en',
     tag: 'Motion Version',
     video: '/assets/motion-new-en.mp4',
-    poster: '/assets/work-scene-new-01.webp',
+    poster: '/assets/motion-poster-nc01.webp',
     text: '新增英文版动态作品，适合海外传播和多语言物料展示。',
   },
   {
@@ -158,7 +197,7 @@ const motionWorks = [
     slug: 'motion-jp',
     tag: 'Motion Version',
     video: '/assets/motion-new-jp.mp4',
-    poster: '/assets/work-scene-new-02.webp',
+    poster: '/assets/motion-poster-tb-pro.webp',
     text: '新增日文版动态作品，补充不同市场版本的动画展示。',
   },
 ]
@@ -196,17 +235,10 @@ const toolIcons = [
   { name: 'AIGC', label: 'AI Workflow' },
 ]
 
-const galleryItems = [
-  { image: '/assets/flat-scene-08.webp', label: 'Scene Visual 08', slug: 'scene-08' },
-  { image: '/assets/flat-scene-40.webp', label: 'Scene Visual 40', slug: 'scene-40' },
-  { image: '/assets/flat-scene-18.webp', label: 'Scene Visual 18', slug: 'scene-18' },
-  { image: '/assets/flat-scene-25.webp', label: 'Scene Visual 25', slug: 'scene-25' },
-  { image: '/assets/flat-scene-26.webp', label: 'Scene Visual 26', slug: 'scene-26' },
-  { image: '/assets/flat-scene-27.webp', label: 'Scene Visual 27', slug: 'scene-27' },
-  { image: '/assets/flat-scene-28.webp', label: 'Scene Visual 28', slug: 'scene-28' },
-  { image: '/assets/flat-scene-36.webp', label: 'Scene Visual 36', slug: 'scene-36' },
-  { image: '/assets/flat-scene-37.webp', label: 'Scene Visual 37', slug: 'scene-37' },
-]
+const galleryItems = [8, 40, 18, 25, 26, 27, 28, 36, 37].map((number) => {
+  const work = folderSceneWorks[number - 1]
+  return { image: work.image, label: work.title, slug: work.slug }
+})
 
 const workPages = [
   ...selectedWorks.map((work) => ({
@@ -224,7 +256,281 @@ const workPages = [
   })),
 ]
 
+const makeProjectImage = (source, index) => ({
+  ...source,
+  id: `${source.image || source.video}-${index}`,
+  type: source.type || 'image',
+})
+
+const makeSceneItems = (numbers, titlePrefix) =>
+  numbers.map((number) => ({
+    title: `${titlePrefix} ${String(number).padStart(2, '0')}`,
+    label: '主图',
+    image: `/assets/flat-scene-${String(number).padStart(2, '0')}.webp`,
+  }))
+
+const makeWhiteItems = (numbers, titlePrefix = '白底图') =>
+  numbers.map((number) => ({
+    title: `${titlePrefix} ${String(number).padStart(2, '0')}`,
+    label: '白底图',
+    image: `/assets/flat-white-${String(number).padStart(2, '0')}.webp`,
+  }))
+
+const makeProjectSection = (title, label, works) => ({
+  title,
+  label,
+  works: works.map(makeProjectImage),
+})
+
+const makeProductItems = (prefix, count, titlePrefix, label = '产品图') =>
+  Array.from({ length: count }, (_, index) => {
+    const number = String(index + 1).padStart(2, '0')
+    return {
+      title: `${titlePrefix} ${number}`,
+      label,
+      image: `/assets/${prefix}-${number}.webp`,
+    }
+  })
+
+const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix) => {
+  const mainWorks = makeProductItems(`${prefix}-main`, mainCount, `${titlePrefix}主图`, '主图')
+  const orderedMainWorks = [
+    { ...mainWorks[mainWorks.length - 1], label: '白底图' },
+    ...mainWorks.slice(0, -1),
+  ].map((work, index) => ({
+    ...work,
+    title: `${titlePrefix}${index === 0 ? '白底图' : '主图'} ${String(index + 1).padStart(2, '0')}`,
+  }))
+  const sections = [
+    makeProjectSection('主图', 'Main Visuals', orderedMainWorks),
+  ]
+
+  if (detailHeight > 0) {
+    sections.push({
+      title: '详情页',
+      label: 'Detail Page',
+      image: `/assets/${prefix}-detail-01.jpg`,
+      imageWidth: 790,
+      imageHeight: detailHeight,
+      variant: 'detailColumns',
+    })
+  }
+
+  return sections
+}
+
+const aromaProducts = [
+  {
+    title: '100ml',
+    label: '100ml Aroma',
+    slug: '100ml',
+    cover: '/assets/project-aroma-100ml-main-01.webp',
+    description: '100ml 香薰产品主图与详情页。',
+    sections: makeProductSections('project-aroma-100ml', 5, 27348, '100ml 香薰'),
+  },
+  {
+    title: '160ml',
+    label: '160ml Aroma',
+    slug: '160ml',
+    cover: '/assets/project-aroma-160ml-main-01.webp',
+    description: '160ml 香薰产品主图与详情页。',
+    sections: makeProductSections('project-aroma-160ml', 6, 35307, '160ml 香薰'),
+  },
+  {
+    title: '车载香膏',
+    label: 'Car Balm',
+    slug: 'car-balm',
+    cover: '/assets/project-aroma-car-balm-main-01.webp',
+    description: '车载香膏产品主图与详情页。',
+    sections: makeProductSections('project-aroma-car-balm', 6, 27348, '车载香膏'),
+  },
+  {
+    title: '室内香薰',
+    label: 'Indoor Aroma',
+    slug: 'indoor',
+    cover: '/assets/project-aroma-indoor-main-01.webp',
+    description: '室内香薰产品主图与详情页。',
+    sections: makeProductSections('project-aroma-indoor', 6, 22515, '室内香薰'),
+  },
+  {
+    title: '其他香薰作品',
+    label: 'Aroma Collection',
+    slug: 'other-aroma',
+    cover: '/assets/flat-scene-40.webp',
+    description: '车载香膏与室内香薰的产品图和场景视觉。',
+    sections: [makeProjectSection('主图', 'Main Visuals', [
+      ...makeWhiteItems([13, 14, 15, 16], '香薰白底图'),
+      ...makeSceneItems([10, 11, 20, 40, 41], '香薰场景图'),
+    ])],
+  },
+]
+
+const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
+  const prefix = `project-earphone-${slug}`
+  const mainWorks = makeProductItems(`${prefix}-main`, mainCount, `${title}主图`, '主图')
+  const whiteWork = (image) => ({ label: '白底图', image })
+  const whiteFromMain = (work) => ({ ...work, label: '白底图' })
+  const orderedMainWorks = {
+    bc10: [whiteFromMain(mainWorks[0]), whiteFromMain(mainWorks[12]), ...mainWorks.slice(1, 12)],
+    i2: [...mainWorks.slice(6).map(whiteFromMain), ...mainWorks.slice(0, 6)],
+    nc01: [whiteWork('/assets/project-earphone-nc01-white.png'), ...mainWorks],
+    glow: [whiteWork('/assets/project-earphone-glow-white.png'), ...mainWorks],
+    wukong: [
+      whiteWork('/assets/project-earphone-wukong-white-01.jpg'),
+      whiteWork('/assets/project-earphone-wukong-white-02.jpg'),
+      ...mainWorks,
+    ],
+    dumpling: [
+      ...[0, 1, 2, 3].map((index) => whiteFromMain(mainWorks[index])),
+      ...[4, 9, 11, 12, 13].map((index) => mainWorks[index]),
+    ],
+  }[slug] || mainWorks
+  const numberedMainWorks = orderedMainWorks.map((work, index) => ({
+    ...work,
+    title: `${title}${work.label === '白底图' ? '白底图' : '主图'} ${String(index + 1).padStart(2, '0')}`,
+  }))
+  const sections = [
+    makeProjectSection('主图', 'Main Visuals', numberedMainWorks),
+  ]
+
+  if (detailCount) {
+    const detailWorks = makeProductItems(`${prefix}-detail`, detailCount, `${title} A+`, 'A+')
+    const splitWorks = ['glow', 'i2'].includes(slug)
+      ? Array.from({ length: 7 }, (_, index) => ({
+          ...detailWorks[0],
+          title: `${title} A+ ${String(index + 1).padStart(2, '0')}`,
+          cropIndex: index,
+          cropCount: 7,
+        }))
+      : slug === 'dumpling'
+        ? [
+            { ...detailWorks[0], title: `${title} A+ 01 上`, cropIndex: 0, cropCount: 2 },
+            { ...detailWorks[0], title: `${title} A+ 01 下`, cropIndex: 1, cropCount: 2 },
+            ...detailWorks.slice(1),
+          ]
+        : null
+    sections.push(splitWorks
+      ? { ...makeProjectSection('A+', 'A+ Visuals', splitWorks), variant: 'splitAPlus' }
+      : makeProjectSection('A+', 'A+ Visuals', detailWorks))
+  }
+  return {
+    title,
+    label: 'Earphone Product',
+    slug,
+    cover: `/assets/${prefix}-main-01.webp`,
+    description: `${title} 耳机的产品主图${detailCount ? '、A+ 页面' : ''}。`,
+    sections,
+  }
+}
+
+const earphoneProducts = [
+  { ...makeEarphoneProduct('BC10', 'bc10', 13, 0), group: 'featured' },
+  { ...makeEarphoneProduct('I2', 'i2', 8, 1), group: 'featured' },
+  { ...makeEarphoneProduct('NC01', 'nc01', 10, 0), group: 'featured' },
+  { ...makeEarphoneProduct('发光耳机', 'glow', 6, 1), group: 'featured' },
+  { ...makeEarphoneProduct('悟空', 'wukong', 8, 6), group: 'featured' },
+  { ...makeEarphoneProduct('水饺', 'dumpling', 17, 7), cover: '/assets/project-earphone-dumpling-main-05.webp', group: 'featured' },
+  {
+    title: '其他耳机作品',
+    label: 'Other Earphones',
+    slug: 'other-earphones',
+    group: 'other',
+    cover: '/assets/project-earphone-render-01-clean.webp',
+    description: '其他耳机型号的白底图、产品主图与场景视觉。',
+    sections: [
+      makeProjectSection('主图', 'Main Visuals', [
+        ...makeWhiteItems([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24], '耳机白底图'),
+        ...makeWhiteItems([18], '耳机配件白底图'),
+        ...makeWhiteItems([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13], '耳机主图').map((work) => ({
+          ...work,
+          label: '主图',
+          image: work.image.replace('/assets/flat-white-', '/assets/project-earphone-render-').replace(/render-(0[1-3])\.webp$/, 'render-$1-clean.webp'),
+        })),
+        ...makeSceneItems([9, 29], '耳机场景图'),
+        ...makeSceneItems([8, 46], '耳机配件场景图'),
+      ]),
+    ],
+  },
+]
+
+const oxygenProducts = [{
+  title: '便携制氧机',
+  label: 'Portable Oxygen System',
+  slug: 'portable',
+  cover: '/assets/flat-scene-04.webp',
+  description: '便携制氧机的宣传海报与产品详情页。',
+  sections: [
+    makeProjectSection('海报', 'Posters', makeSceneItems([4, 5, 6, 7], '制氧机海报')),
+    {
+      title: '详情页', label: 'Detail Page', variant: 'detailColumns',
+      image: '/assets/flat-detail-03.jpg', imageWidth: 998, imageHeight: 36000,
+    },
+  ],
+}]
+
+const lightingProducts = [
+  {
+    title: '户外泛光灯',
+    label: 'Outdoor Lighting',
+    slug: 'outdoor',
+    cover: '/assets/flat-scene-31.webp',
+    description: '户外泛光灯的 A+ 场景应用与功能展示。',
+    sections: [makeProjectSection('A+', 'A+ Visuals', [31, 32, 33, 34, 35, 36, 37].map((number, index) => ({
+      title: `户外照明 A+ ${String(index + 1).padStart(2, '0')}`,
+      label: 'A+',
+      image: `/assets/flat-scene-${number}.webp`,
+    })))],
+  },
+]
+
+const otherProducts = [
+  {
+    title: '海报', label: 'Campaign Posters', slug: 'posters',
+    cover: '/assets/flat-scene-22.webp',
+    description: '室内灯具、洗衣机、显示设备与耳机的宣传海报。',
+    sections: [{
+      title: '海报', label: 'Posters', variant: 'posterGroups',
+      groups: [
+        makeProjectSection('室内灯具', 'Interior Lighting', makeSceneItems([22, 23, 24], '室内灯具海报')),
+        makeProjectSection('洗衣机', 'Laundry', makeSceneItems([17, 18, 19], '洗衣机海报')),
+        makeProjectSection('显示设备', 'Displays', makeSceneItems([42, 43, 44], '显示设备海报')),
+        makeProjectSection('耳机', 'Earphone Posters', makeSceneItems([13, 14, 15], '耳机海报')),
+      ],
+    }],
+  },
+  {
+    title: '行车记录仪', label: 'Dash Camera', slug: 'dash-camera',
+    cover: '/assets/flat-detail-04-slice-01.jpg', description: '行车记录仪详情页设计。',
+    sections: [{
+      title: '详情页', label: 'Detail Page', variant: 'detailColumns',
+      image: '/assets/flat-detail-04.jpg', imageWidth: 790, imageHeight: 25417,
+    }],
+  },
+]
+
+const subProjectsByCategory = {
+  aroma: aromaProducts,
+  earphone: earphoneProducts,
+  other: [...oxygenProducts, ...lightingProducts, ...otherProducts],
+}
+
+const projectPages = projectCategories.map((project) => ({
+  ...project,
+  subProjects: subProjectsByCategory[project.slug],
+}))
+
+const projectEntries = projectPages.flatMap((parent) =>
+  parent.subProjects.map((product) => ({ parent, product })),
+)
+
 const RETURN_POSITION_KEY = 'keysonPortfolioReturnPosition'
+const PROJECT_FILTER_KEY = 'keysonPortfolioProjectFilter'
+const legacyProductRoutes = {
+  '#project/other/accessories': '#project/earphone/other-earphones',
+  '#project/other/indoor-lighting': '#project/other/posters',
+  '#project/other/appliances': '#project/other/posters',
+  '#project/other/displays': '#project/other/posters',
+}
 
 function useResponsiveColumnCount() {
   const getCount = () => {
@@ -266,22 +572,64 @@ function makeMasonryColumns(works, columnCount) {
   return columns
 }
 
-function saveReturnPosition(fallbackHash) {
+function saveReturnPosition(fallbackHash, preferFallback = false) {
   sessionStorage.setItem(
     RETURN_POSITION_KEY,
     JSON.stringify({
-      hash: window.location.hash && !window.location.hash.startsWith('#work/') ? window.location.hash : fallbackHash,
+      hash: preferFallback
+        ? fallbackHash
+        : window.location.hash && !window.location.hash.startsWith('#work/')
+          ? window.location.hash
+          : fallbackHash,
       y: window.scrollY,
     }),
   )
 }
 
+function hasReturnPositionForCurrentHash() {
+  try {
+    const raw = sessionStorage.getItem(RETURN_POSITION_KEY)
+    if (!raw) return false
+    const position = JSON.parse(raw)
+    return position.hash === window.location.hash
+  } catch {
+    sessionStorage.removeItem(RETURN_POSITION_KEY)
+    return false
+  }
+}
+
 function App() {
   const activeWork = useActiveWork()
+  const activeProjectProduct = useActiveProjectProduct()
+  const activeProject = useActiveProject()
   const [lightboxWork, setLightboxWork] = useState(null)
-  const routeKey = activeWork ? `work-${activeWork.slug}` : `main-${window.location.hash || '#home'}`
+  const routeKey = activeWork
+    ? `work-${activeWork.slug}`
+    : activeProjectProduct
+      ? `product-${activeProjectProduct.parent.slug}-${activeProjectProduct.product.slug}`
+      : activeProject
+      ? `project-${activeProject.slug}`
+      : `main-${window.location.hash || '#home'}`
   useScrollReveal(routeKey)
-  useReturnPosition(activeWork)
+  useReturnPosition(routeKey)
+
+  if (activeProjectProduct) {
+    return (
+      <main>
+        <Navigation />
+        <ProjectProductDetail parent={activeProjectProduct.parent} product={activeProjectProduct.product} />
+      </main>
+    )
+  }
+
+  if (activeProject) {
+    return (
+      <main>
+        <Navigation />
+        <ProjectDetail project={activeProject} />
+      </main>
+    )
+  }
 
   if (activeWork?.type === 'video') {
     return (
@@ -297,8 +645,8 @@ function App() {
       <Navigation />
       <Hero onOpenWork={setLightboxWork} />
       <About />
-      <FeaturedProjects onOpenWork={setLightboxWork} />
-      <MotionWorks />
+      <Projects />
+      <MotionProjects />
       <Strengths />
       <Contact />
       <MediaLightbox work={lightboxWork} onClose={() => setLightboxWork(null)} />
@@ -321,23 +669,70 @@ function useActiveWork() {
   return workPages.find((work) => work.slug === decodeURIComponent(match[1])) || null
 }
 
-function useReturnPosition(activeWork) {
+function useActiveProject() {
+  const [hash, setHash] = useState(() => window.location.hash)
+
   useEffect(() => {
-    if (activeWork) return
+    const handleHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
+  const match = hash.match(/^#project\/([^/]+)$/)
+  if (!match) return null
+
+  const slug = decodeURIComponent(match[1])
+  return projectPages.find((project) => project.slug === (slug === 'oxygen' || slug === 'lighting' ? 'other' : slug)) || null
+}
+
+function useActiveProjectProduct() {
+  const [hash, setHash] = useState(() => window.location.hash)
+
+  useEffect(() => {
+    const handleHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  useEffect(() => {
+    if (legacyProductRoutes[hash]) {
+      window.history.replaceState(null, '', legacyProductRoutes[hash])
+    }
+  }, [hash])
+
+  const normalizedHash = legacyProductRoutes[hash] || hash
+  const match = normalizedHash.match(/^#project\/([^/]+)\/([^/]+)$/)
+  if (!match) return null
+
+  const slug = decodeURIComponent(match[1])
+  const parent = projectPages.find((project) => project.slug === (slug === 'oxygen' || slug === 'lighting' ? 'other' : slug))
+  const product = parent?.subProjects?.find((item) => item.slug === decodeURIComponent(match[2]))
+
+  return parent && product ? { parent, product } : null
+}
+
+function useReturnPosition(routeKey) {
+  useEffect(() => {
     const raw = sessionStorage.getItem(RETURN_POSITION_KEY)
-    if (!raw) return
+    if (!raw) {
+      if (window.location.hash === '#motion') {
+        window.setTimeout(() => document.getElementById('motion')?.scrollIntoView({ behavior: 'auto' }), 0)
+      }
+      return
+    }
 
-    sessionStorage.removeItem(RETURN_POSITION_KEY)
     try {
       const position = JSON.parse(raw)
+      if (position.hash !== window.location.hash) return
+
+      sessionStorage.removeItem(RETURN_POSITION_KEY)
       window.setTimeout(() => {
         window.scrollTo({ top: position.y || 0, behavior: 'auto' })
       }, 0)
     } catch {
       sessionStorage.removeItem(RETURN_POSITION_KEY)
     }
-  }, [activeWork])
+  }, [routeKey])
 }
 
 function useScrollReveal(routeKey) {
@@ -376,7 +771,7 @@ function Navigation() {
       </a>
       <div className="navLinks">
         <a href="#about">经历</a>
-        <a href="#projects">作品</a>
+        <a href="#projects">项目</a>
         <a href="#motion">动画</a>
         <a href="#strengths">优势</a>
       </div>
@@ -391,65 +786,31 @@ function Navigation() {
 function Hero({ onOpenWork }) {
   return (
     <section className="hero" id="home">
-      <video
-        className="heroVideo"
-        src="/assets/hero-abstract-blue.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster="/assets/project-render.webp"
-      />
+      <video className="heroVideo" src="/assets/hero-abstract-blue.mp4" autoPlay muted loop playsInline poster="/assets/project-render.webp" />
       <div className="heroShade" />
       <div className="heroInner shell">
         <p className="heroEyebrow">{profile.name} · {profile.alias}</p>
-        <div className="heroTitle" aria-label="Portfolio">
-          <span>PORT</span>
-          <span>FOLIO</span>
-        </div>
+        <div className="heroTitle" aria-label="Portfolio"><span>PORT</span><span>FOLIO</span></div>
         <div className="heroSkills" aria-label="核心能力">
-          {heroSkills.map((skill) => (
-            <span key={skill}>{skill}</span>
-          ))}
+          {heroSkills.map((skill) => <span key={skill}>{skill}</span>)}
         </div>
         <div className="heroStage reveal">
           <aside className="heroIntro" aria-label="个人简介">
             <span className="introLine" />
-            <p>
-              {profile.roles}
-              <br />
-              以 3D 渲染、AI 工作流与品牌视觉系统，为数码产品建立更有质感与识别度的商业表达。
-            </p>
-            <a className="introAction" href="#projects">
-              查看作品
-              <ArrowUpRight size={17} />
-            </a>
+            <p>{profile.roles}<br />以 3D 渲染、AI 工作流与品牌视觉系统，为数码产品建立更有质感与识别度的商业表达。</p>
+            <a className="introAction" href="#projects">查看作品 <ArrowUpRight size={17} /></a>
           </aside>
           <div className="heroVisual" aria-label="3D 人物主视觉">
             <div className="toolOrbit" aria-label="设计工具">
               {toolIcons.map((tool, index) => (
-                <span className={`toolIcon toolIcon${index + 1}`} key={tool.name}>
-                  <strong>{tool.name}</strong>
-                  <small>{tool.label}</small>
-                </span>
+                <span className={`toolIcon toolIcon${index + 1}`} key={tool.name}><strong>{tool.name}</strong><small>{tool.label}</small></span>
               ))}
             </div>
-            <img
-              src="/assets/keyson-comic-clean.webp"
-              alt="Keyson 漫画 3D 人物主视觉"
-              decoding="async"
-              fetchPriority="high"
-            />
+            <img src="/assets/keyson-comic-clean.webp" alt="Keyson 漫画 3D 人物主视觉" decoding="async" fetchPriority="high" />
           </div>
           <aside className="heroStats" aria-label="项目数据">
-            <div>
-              <strong>6+</strong>
-              <span>年渲染视觉设计经验</span>
-            </div>
-            <div>
-              <strong>多品类</strong>
-              <span>消费电子与个护项目</span>
-            </div>
+            <div><strong>6+</strong><span>年渲染视觉设计经验</span></div>
+            <div><strong>多品类</strong><span>消费电子与个护项目</span></div>
           </aside>
         </div>
       </div>
@@ -658,147 +1019,405 @@ function About() {
   )
 }
 
-function FeaturedProjects({ onOpenWork }) {
-  const [activeFilter, setActiveFilter] = useState('all')
-  const [expanded, setExpanded] = useState(false)
-  const columnCount = useResponsiveColumnCount()
-  const filteredWorks = selectedWorks.filter((work) => activeFilter === 'all' || work.category === activeFilter)
-  const visibleWorks = expanded ? filteredWorks : filteredWorks.slice(0, 8)
-  const workColumns = makeMasonryColumns(visibleWorks, columnCount)
+function Projects() {
+  const [activeFilter, setActiveFilter] = useState(() => {
+    const savedFilter = sessionStorage.getItem(PROJECT_FILTER_KEY)
+    return projectCategories.some((project) => project.slug === savedFilter)
+      ? savedFilter
+      : projectCategories[0].slug
+  })
+  const visibleProjects = projectEntries.filter(({ parent }) => parent.slug === activeFilter)
+  const activeCategory = projectCategories.find((category) => category.slug === activeFilter)
 
   return (
     <section className="section projects" id="projects">
-      <div className="shell worksBoard reveal">
-        <div className="worksBoardHead">
+      <div className="shell projectListBoard reveal">
+        <div className="projectListHead">
           <div>
-            <p className="sectionKicker">Selected Works</p>
-            <h2>
-              Explore Our <span className="titleAccent">Portfolio</span>
-            </h2>
+            <p className="sectionKicker">Portfolio / 作品目录</p>
+            <h2>Selected Works</h2>
+            <p className="projectListContext">{activeCategory.description}</p>
           </div>
-          <div className="workFilters" aria-label="作品分类筛选">
-            {workFilters.map((filter) => (
+          <div className="projectFilters" role="group" aria-label="筛选项目">
+            {projectCategories.map((filter) => (
               <button
-                className={activeFilter === filter.id ? 'isActive' : ''}
                 type="button"
-                key={filter.id}
+                key={filter.slug}
+                className={activeFilter === filter.slug ? 'isActive' : ''}
+                aria-pressed={activeFilter === filter.slug}
                 onClick={() => {
-                  setActiveFilter(filter.id)
-                  setExpanded(false)
+                  sessionStorage.setItem(PROJECT_FILTER_KEY, filter.slug)
+                  setActiveFilter(filter.slug)
                 }}
               >
-                {filter.label}
+                {filter.title}
               </button>
             ))}
           </div>
         </div>
-        <div className="selectedGrid">
-          {workColumns.map((column, columnIndex) => (
-            <div className="selectedColumn" key={`column-${columnIndex}`}>
-              {column.map((work) => (
-                <button
-                  type="button"
-                  className="selectedWorkTile"
-                  key={work.slug}
-                  onClick={() => onOpenWork(work)}
-                >
-                  <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
-                  <div className="workMeta">
-                    <strong>{work.title}</strong>
-                  </div>
-                </button>
-              ))}
+        <div className="projectListRows" aria-label="项目列表">
+          {visibleProjects.map(({ parent, product }, index) => (
+            <a
+              className="projectListRow"
+              href={`#project/${parent.slug}/${product.slug}`}
+              key={`${parent.slug}/${product.slug}`}
+              onClick={() => saveReturnPosition('#projects', true)}
+            >
+              <span className="projectListNumber">{String(index + 1).padStart(2, '0')}</span>
+              <div className="projectListInfo">
+                <h3>{product.title}</h3>
+                <p>{product.description}</p>
               </div>
+              <span className="projectListTag">{parent.title}</span>
+              <div className="projectListThumb">
+                <img src={product.cover} alt="" loading="lazy" decoding="async" />
+              </div>
+            </a>
           ))}
         </div>
-        {filteredWorks.length > 8 && (
-          <button className="worksMore" type="button" onClick={() => setExpanded((value) => !value)}>
-            {expanded ? '收起' : 'More'}
-          </button>
-        )}
       </div>
     </section>
   )
 }
 
-function MotionWorks() {
-  const handlePlay = (event) => {
-    event.currentTarget.play().catch(() => {})
-  }
+function MotionProjects() {
+  return (
+    <section className="section motionProjects" id="motion">
+      <div className="shell reveal">
+        <div className="motionProjectsHead">
+          <div>
+            <p className="sectionKicker">Motion / 动态作品</p>
+            <h2>动画作品</h2>
+          </div>
+          <p>产品在镜头中的另一种表达。选择项目查看完整视频。</p>
+        </div>
+        <div className="motionProjectsGrid">
+          {motionWorks.map((work) => (
+            <a
+              className="motionProjectCard"
+              href={`#work/${work.slug}`}
+              key={work.slug}
+              onClick={() => saveReturnPosition('#motion', true)}
+            >
+              <div className="motionProjectPoster">
+                <img src={work.poster} alt="" loading="lazy" decoding="async" />
+                <span className="motionProjectPlay" aria-hidden="true">▶</span>
+              </div>
+              <div className="motionProjectInfo">
+                <div><h3>{work.title}</h3><p>{work.tag}</p></div>
+                <ArrowUpRight size={20} aria-hidden="true" />
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
-  const handlePause = (event) => {
-    event.currentTarget.pause()
-    event.currentTarget.currentTime = 0
+function ProjectDetail({ project }) {
+  useEffect(() => {
+    if (hasReturnPositionForCurrentHash()) return
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [project.slug])
+
+  const handleBack = (event) => {
+    event.preventDefault()
+
+    let targetHash = '#projects'
+    try {
+      const raw = sessionStorage.getItem(RETURN_POSITION_KEY)
+      if (raw) {
+        const position = JSON.parse(raw)
+        targetHash = position.hash || targetHash
+      }
+    } catch {
+      sessionStorage.removeItem(RETURN_POSITION_KEY)
+    }
+
+    window.location.hash = targetHash
   }
 
   return (
-    <section className="section motionWorks" id="motion">
-      <div className="shell sectionHead split reveal">
-        <div>
-          <p className="sectionKicker">Motion Works</p>
-          <h2>
-            Product <span className="titleAccent">Films</span>
-          </h2>
-        </div>
-        <p>
-          动画作品以项目入口的方式呈现：默认静态封面保持页面克制，鼠标悬浮时播放预览，方便快速判断作品质感。
-        </p>
-      </div>
-      <div className="shell featuredMotion reveal">
-        <a
-          className="motionCard motionCardLarge"
-          href={`#work/${motionWorks[0].slug}`}
-          onClick={() => saveReturnPosition('#motion')}
-        >
-          <video
-            src={motionWorks[0].video}
-            poster={motionWorks[0].poster}
-            muted
-            loop
-            playsInline
-            preload="none"
-            onMouseEnter={handlePlay}
-            onMouseLeave={handlePause}
-          />
-          <div className="motionMeta">
-            <strong>{motionWorks[0].title}</strong>
-          </div>
+    <section className="projectDetailPage">
+      <div className="shell projectDetailShell reveal isVisible">
+        <a className="detailBack" href="#projects" onClick={handleBack}>
+          返回项目
+          <ArrowUpRight size={18} />
         </a>
-        <div className="featuredCopy">
-          <h3>用动态镜头讲清产品价值</h3>
-          <p>{motionWorks[0].text}</p>
-          <a href={`#work/${motionWorks[0].slug}`} onClick={() => saveReturnPosition('#motion')}>
-            查看主片
-            <ArrowUpRight size={18} />
-          </a>
-        </div>
-      </div>
-      <div className="shell motionGrid reveal">
-        {motionWorks.slice(1).map((work) => (
-          <a
-            className="motionCard"
-            href={`#work/${work.slug}`}
-            key={work.title}
-            onClick={() => saveReturnPosition('#motion')}
-          >
-            <video
-              src={work.video}
-              poster={work.poster}
-              muted
-              loop
-              playsInline
-              preload="none"
-              onMouseEnter={handlePlay}
-              onMouseLeave={handlePause}
-            />
-            <div className="motionMeta">
-              <strong>{work.title}</strong>
-              <p>{work.text}</p>
-            </div>
-          </a>
-        ))}
+        <header className="projectDetailHero">
+          <div>
+            <p className="sectionKicker">Project Case</p>
+            <h1>{project.title}</h1>
+            <span>{project.label}</span>
+          </div>
+          <p>{project.description}</p>
+        </header>
+        <ProjectSubProjectGrid project={project} />
       </div>
     </section>
+  )
+}
+
+function ProjectSubProjectGrid({ project }) {
+  if (project.slug === 'earphone') {
+    return (
+      <div className="projectSubGroups">
+        <section className="projectSubGroup">
+          <div className="projectSubGroupHead">
+            <h2>精选型号</h2>
+            <p>主图、视觉页面与产品动画</p>
+          </div>
+          <ProjectSubCards project={project} items={project.subProjects.filter((item) => item.group === 'featured')} className="projectSubGrid--featured" />
+        </section>
+        <section className="projectSubGroup">
+          <div className="projectSubGroupHead">
+            <h2>其他耳机作品</h2>
+            <p>更多耳机产品主图</p>
+          </div>
+          <ProjectSubCards project={project} items={project.subProjects.filter((item) => item.group === 'other')} className="projectSubGrid--three" />
+        </section>
+      </div>
+    )
+  }
+
+  return <ProjectSubCards project={project} items={project.subProjects} className={project.slug === 'other' ? 'projectSubGrid--three' : ''} />
+}
+
+function ProjectSubCards({ project, items, className = '' }) {
+  return (
+    <div className={`projectSubGrid ${className}`} aria-label={`${project.title}项目列表`}>
+      {items.map((item) => (
+        <a
+          className="projectSubCard"
+          href={`#project/${project.slug}/${item.slug}`}
+          key={item.slug}
+          onClick={() => saveReturnPosition(`#project/${project.slug}`)}
+        >
+          <div className="projectSubPlaceholder">
+            <img src={item.cover} alt={`${item.title}代表作品`} loading="lazy" decoding="async" />
+          </div>
+          <div className="projectSubMeta">
+            <h2>{item.title}</h2>
+            <p>{item.label}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  )
+}
+
+function ProjectProductDetail({ parent, product }) {
+  useEffect(() => {
+    if (hasReturnPositionForCurrentHash()) return
+    window.scrollTo({ top: 0, behavior: 'auto' })
+  }, [parent.slug, product.slug])
+
+  let backHash = `#project/${parent.slug}`
+  try {
+    if (JSON.parse(sessionStorage.getItem(RETURN_POSITION_KEY) || 'null')?.hash === '#projects') {
+      backHash = '#projects'
+    }
+  } catch {
+    sessionStorage.removeItem(RETURN_POSITION_KEY)
+  }
+
+  const handleBack = (event) => {
+    event.preventDefault()
+    window.location.hash = backHash
+  }
+
+  return (
+    <section className="projectDetailPage">
+      <div className="shell projectDetailShell reveal isVisible">
+        <a className="detailBack" href={backHash} onClick={handleBack}>
+          {backHash === '#projects' ? '返回项目' : `返回${parent.title}`}
+          <ArrowUpRight size={18} />
+        </a>
+        <header className="projectDetailHero">
+          <div>
+            <p className="sectionKicker">{parent.title}项目</p>
+            <h1>{product.title}</h1>
+            <span>{product.label}</span>
+          </div>
+          <p>{product.description}</p>
+        </header>
+        <div className="projectSectionStack">
+          {product.sections.map((section) => (
+            <section className="projectWorkSection" key={section.title}>
+              <div className="projectWorkSectionHead">
+                <h2>{section.title}</h2>
+                <span>{section.label}</span>
+              </div>
+              {section.variant === 'detailColumns' ? (
+                <ProjectDetailColumns image={section.image} imageWidth={section.imageWidth} imageHeight={section.imageHeight} label={`${product.title}详情页`} />
+              ) : section.variant === 'posterGroups' ? (
+                <div className="projectPosterGroups">
+                  {section.groups.map((group) => (
+                    <div className="projectPosterGroup" key={group.title}>
+                      <h3>{group.title}</h3>
+                      <ProjectAPlusGallery works={group.works} label={`${group.title}海报`} />
+                    </div>
+                  ))}
+                </div>
+              ) : section.title === '海报' ? (
+                <div className="projectPosterGallery">
+                  <ProjectAPlusGallery works={section.works} label={`${product.title}海报`} />
+                </div>
+              ) : section.title === 'A+' ? (
+                section.variant === 'splitAPlus'
+                  ? <ProjectSplitAPlusGallery works={section.works} label={`${product.title} A+ 作品`} />
+                  : <ProjectAPlusGallery works={section.works} label={`${product.title} A+ 作品`} />
+              ) : (
+                <ProjectCaseGrid
+                  works={section.works}
+                  label={`${product.title}${section.title}列表`}
+                  mainGrid={section.title === '主图' && product.slug !== 'other-earphones'}
+                />
+              )}
+            </section>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ProjectAPlusGallery({ works, label }) {
+  return (
+    <div className="projectAPlusGallery" aria-label={label}>
+      {works.map((work) => (
+        <img src={work.image} alt={work.title} key={work.id} loading="lazy" decoding="async" />
+      ))}
+    </div>
+  )
+}
+
+function ProjectSplitAPlusGallery({ works, label }) {
+  return (
+    <div className="projectSplitAPlusGallery" aria-label={label}>
+      {works.map((work) => {
+        const cropCount = work.cropCount || 1
+        return (
+          <div
+            className="projectSplitAPlusPanel"
+            role="img"
+            aria-label={work.title}
+            key={work.id}
+            style={{
+              backgroundImage: `url(${work.image})`,
+              backgroundSize: `100% ${cropCount * 100}%`,
+              backgroundPosition: `center ${cropCount === 1 ? 0 : work.cropIndex * 100 / (cropCount - 1)}%`,
+            }}
+          />
+        )
+      })}
+    </div>
+  )
+}
+
+function ProjectDetailColumns({ image, imageWidth = 790, imageHeight, label }) {
+  return (
+    <div className="projectDetailColumns" aria-label={label}>
+      {Array.from({ length: 4 }, (_, index) => (
+        <div
+          className="projectDetailColumn"
+          role="img"
+          aria-label={`${label}第 ${index + 1} 段`}
+          key={index}
+          style={{
+            aspectRatio: `${imageWidth * 4} / ${imageHeight}`,
+            backgroundImage: `url(${image})`,
+            backgroundPosition: `center ${index * 100 / 3}%`,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function ProjectCaseGrid({ works, label, mainGrid = false }) {
+  return (
+    <div className={`projectCaseMasonry ${mainGrid ? 'isMainGrid' : ''}`} aria-label={label}>
+      {works.map((work) => (
+        <article className={`projectCaseCard ${work.variant === 'detail' ? 'isDetail' : ''}`} key={work.id}>
+          {work.type === 'video' ? (
+            <video src={work.video} poster={work.image} controls muted loop playsInline preload="metadata" />
+          ) : (
+            <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
+          )}
+          <div className="projectCaseMeta">
+            <span>{work.label}</span>
+            <strong>{work.title}</strong>
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}
+
+function formatVideoTime(seconds) {
+  if (!Number.isFinite(seconds)) return '0:00'
+  const value = Math.floor(seconds)
+  return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, '0')}`
+}
+
+function MotionVideoPlayer({ work }) {
+  const videoRef = useRef(null)
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCurrentTime] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const seekTo = (event) => {
+    const nextTime = Number(event.currentTarget.value)
+    if (!Number.isFinite(nextTime)) return
+    setCurrentTime(nextTime)
+    if (videoRef.current?.readyState >= 1) videoRef.current.currentTime = nextTime
+  }
+
+  const togglePlayback = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) video.play().catch(() => {})
+    else video.pause()
+  }
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        src={work.media}
+        poster={work.image}
+        controls
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+        onDurationChange={(event) => setDuration(event.currentTarget.duration)}
+        onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
+      <div className="videoSeekControls">
+        <button type="button" onClick={togglePlayback} aria-label={isPlaying ? '暂停视频' : '播放视频'}>
+          {isPlaying ? '暂停' : '播放'}
+        </button>
+        <span>{formatVideoTime(currentTime)}</span>
+        <input
+          type="range"
+          min="0"
+          max={duration || 1}
+          step="0.1"
+          value={Math.min(currentTime, duration || 1)}
+          onChange={seekTo}
+          disabled={!duration}
+          aria-label="拖动视频播放进度"
+        />
+        <span>{formatVideoTime(duration)}</span>
+      </div>
+    </>
   )
 }
 
@@ -815,7 +1434,11 @@ function WorkDetail({ work }) {
       const raw = sessionStorage.getItem(RETURN_POSITION_KEY)
       if (raw) {
         const position = JSON.parse(raw)
-        targetHash = position.hash || targetHash
+        if (work.type === 'video' && position.hash !== '#motion') {
+          sessionStorage.removeItem(RETURN_POSITION_KEY)
+        } else {
+          targetHash = position.hash || targetHash
+        }
       }
     } catch {
       sessionStorage.removeItem(RETURN_POSITION_KEY)
@@ -838,7 +1461,7 @@ function WorkDetail({ work }) {
         </header>
         <div className="detailMediaWrap">
           {work.type === 'video' ? (
-            <video src={work.media} poster={work.image} controls autoPlay muted loop playsInline preload="metadata" />
+            <MotionVideoPlayer key={work.slug} work={work} />
           ) : (
             <img src={work.media} alt={work.title} loading="lazy" decoding="async" />
           )}
