@@ -300,14 +300,15 @@ const makeProductItems = (prefix, count, titlePrefix, label = '产品图') =>
     }
   })
 
-const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix, detailImage = `/assets/${prefix}-detail-01.jpg`) => {
+const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix, detailImage = `/assets/${prefix}-detail-01.jpg`, whiteIndices = [mainCount - 1]) => {
   const mainWorks = makeProductItems(`${prefix}-main`, mainCount, `${titlePrefix}主图`, '主图')
+  const whiteIndexSet = new Set(whiteIndices)
   const orderedMainWorks = [
-    { ...mainWorks[mainWorks.length - 1], label: '白底图' },
-    ...mainWorks.slice(0, -1),
+    ...whiteIndices.map((index) => ({ ...mainWorks[index], label: '白底图' })),
+    ...mainWorks.filter((_, index) => !whiteIndexSet.has(index)),
   ].map((work, index) => ({
     ...work,
-    title: `${titlePrefix}${index === 0 ? '白底图' : '主图'} ${String(index + 1).padStart(2, '0')}`,
+    title: `${titlePrefix}${work.label === '白底图' ? '白底图' : '主图'} ${String(index + 1).padStart(2, '0')}`,
   }))
   const sections = [
     makeProjectSection('主图', 'Main Visuals', orderedMainWorks),
@@ -329,12 +330,12 @@ const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix, detai
 
 const aromaProducts = [
   {
-    title: '100ml',
-    label: '100ml Aroma',
-    slug: '100ml',
-    cover: '/assets/project-aroma-100ml-main-01.webp',
-    description: '100ml 香薰产品主图与详情页。',
-    sections: makeProductSections('project-aroma-100ml', 5, 32639, '100ml 香薰', '/assets/project-aroma-100ml-detail-stitched.jpg'),
+    title: '香砖',
+    label: 'Aroma Block',
+    slug: 'xiang',
+    cover: '/assets/project-aroma-xiang-main-04.webp',
+    description: '香砖产品白底图、场景主图与详情页。',
+    sections: makeProductSections('project-aroma-xiang', 8, 23400, '香砖', '/assets/project-aroma-xiang-detail-01.jpg', [0, 1, 2]),
   },
   {
     title: '160ml',
@@ -368,7 +369,7 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
   const whiteWork = (image) => ({ label: '白底图', image })
   const whiteFromMain = (work) => ({ ...work, label: '白底图' })
   const orderedMainWorks = {
-    bc10: [whiteFromMain(mainWorks[0]), whiteFromMain(mainWorks[12]), ...mainWorks.slice(1, 12)],
+    bc10: [whiteFromMain(mainWorks[0]), whiteFromMain(mainWorks[12]), mainWorks[11], ...mainWorks.slice(1, 11)],
     i2: [...mainWorks.slice(6).map(whiteFromMain), ...mainWorks.slice(0, 6)],
     nc01: [whiteWork('/assets/project-earphone-nc01-white.png'), ...mainWorks],
     glow: [whiteWork('/assets/project-earphone-glow-white.png'), ...mainWorks],
