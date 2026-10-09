@@ -177,6 +177,14 @@ const motionWorks = [
     text: 'ZST 系列产品动态展示。',
   },
   {
+    title: 'Dumpling Plus 产品动画',
+    slug: 'motion-dumpling-plus',
+    tag: 'Product Film',
+    video: '/assets/motion-dumpling-plus.mp4',
+    poster: '/assets/motion-poster-dumpling-plus.webp',
+    text: 'Dumpling Plus 耳机的产品结构、声音与佩戴体验展示。',
+  },
+  {
     title: 'TB-X 产品动画',
     slug: 'motion-tbx',
     tag: 'Product Film',
@@ -292,7 +300,7 @@ const makeProductItems = (prefix, count, titlePrefix, label = '产品图') =>
     }
   })
 
-const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix) => {
+const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix, detailImage = `/assets/${prefix}-detail-01.jpg`) => {
   const mainWorks = makeProductItems(`${prefix}-main`, mainCount, `${titlePrefix}主图`, '主图')
   const orderedMainWorks = [
     { ...mainWorks[mainWorks.length - 1], label: '白底图' },
@@ -309,7 +317,7 @@ const makeProductSections = (prefix, mainCount, detailHeight, titlePrefix) => {
     sections.push({
       title: '详情页',
       label: 'Detail Page',
-      image: `/assets/${prefix}-detail-01.jpg`,
+      image: detailImage,
       imageWidth: 790,
       imageHeight: detailHeight,
       variant: 'detailColumns',
@@ -326,7 +334,7 @@ const aromaProducts = [
     slug: '100ml',
     cover: '/assets/project-aroma-100ml-main-01.webp',
     description: '100ml 香薰产品主图与详情页。',
-    sections: makeProductSections('project-aroma-100ml', 5, 27348, '100ml 香薰'),
+    sections: makeProductSections('project-aroma-100ml', 5, 32639, '100ml 香薰', '/assets/project-aroma-100ml-detail-stitched.jpg'),
   },
   {
     title: '160ml',
@@ -342,7 +350,7 @@ const aromaProducts = [
     slug: 'car-balm',
     cover: '/assets/project-aroma-car-balm-main-01.webp',
     description: '车载香膏产品主图与详情页。',
-    sections: makeProductSections('project-aroma-car-balm', 6, 27348, '车载香膏'),
+    sections: makeProductSections('project-aroma-car-balm', 5, 27348, '车载香膏'),
   },
   {
     title: '室内香薰',
@@ -350,7 +358,7 @@ const aromaProducts = [
     slug: 'indoor',
     cover: '/assets/project-aroma-indoor-main-01.webp',
     description: '室内香薰产品主图与详情页。',
-    sections: makeProductSections('project-aroma-indoor', 6, 22515, '室内香薰'),
+    sections: makeProductSections('project-aroma-indoor', 5, 22515, '室内香薰'),
   },
   {
     title: '其他香薰作品',
@@ -359,7 +367,7 @@ const aromaProducts = [
     cover: '/assets/flat-scene-40.webp',
     description: '车载香膏与室内香薰的产品图和场景视觉。',
     sections: [makeProjectSection('主图', 'Main Visuals', [
-      ...makeWhiteItems([13, 14, 15, 16], '香薰白底图'),
+      ...makeWhiteItems([15], '香薰白底图'),
       ...makeSceneItems([10, 11, 20, 40, 41], '香薰场景图'),
     ])],
   },
@@ -378,6 +386,9 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
     wukong: [
       whiteWork('/assets/project-earphone-wukong-white-01.jpg'),
       whiteWork('/assets/project-earphone-wukong-white-02.jpg'),
+      whiteWork('/assets/project-earphone-wukong-white-03.webp'),
+      whiteWork('/assets/project-earphone-wukong-white-04.webp'),
+      whiteWork('/assets/project-earphone-wukong-white-05.webp'),
       ...mainWorks,
     ],
     dumpling: [
@@ -426,7 +437,7 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
 const earphoneProducts = [
   { ...makeEarphoneProduct('BC10', 'bc10', 13, 0), group: 'featured' },
   { ...makeEarphoneProduct('I2', 'i2', 8, 1), group: 'featured' },
-  { ...makeEarphoneProduct('NC01', 'nc01', 10, 0), group: 'featured' },
+  { ...makeEarphoneProduct('NC01', 'nc01', 10, 6), group: 'featured' },
   { ...makeEarphoneProduct('发光耳机', 'glow', 6, 1), group: 'featured' },
   { ...makeEarphoneProduct('悟空', 'wukong', 8, 6), group: 'featured' },
   { ...makeEarphoneProduct('水饺', 'dumpling', 17, 7), cover: '/assets/project-earphone-dumpling-main-05.webp', group: 'featured' },
@@ -441,6 +452,16 @@ const earphoneProducts = [
       makeProjectSection('主图', 'Main Visuals', [
         ...makeWhiteItems([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 21, 22, 23, 24], '耳机白底图'),
         ...makeWhiteItems([18], '耳机配件白底图'),
+        ...[1, 2, 3].map((number) => ({
+          title: `耳机白底图 新增 ${String(number).padStart(2, '0')}`,
+          label: '白底图',
+          image: `/assets/project-earphone-other-white-${String(number).padStart(2, '0')}.webp`,
+        })),
+        ...[1, 2].map((number) => ({
+          title: `耳机配件白底图 新增 ${String(number).padStart(2, '0')}`,
+          label: '白底图',
+          image: `/assets/project-earphone-other-white-amp-${String(number).padStart(2, '0')}.webp`,
+        })),
         ...makeWhiteItems([1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13], '耳机主图').map((work) => ({
           ...work,
           label: '主图',
@@ -1346,10 +1367,6 @@ function ProjectCaseGrid({ works, label, mainGrid = false }) {
           ) : (
             <img src={work.image} alt={work.title} loading="lazy" decoding="async" />
           )}
-          <div className="projectCaseMeta">
-            <span>{work.label}</span>
-            <strong>{work.title}</strong>
-          </div>
         </article>
       ))}
     </div>
