@@ -395,8 +395,9 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
   ]
 
   if (detailCount) {
-    const detailWorks = makeProductItems(`${prefix}-detail`, detailCount, `${title} A+`, 'A+')
-    const splitWorks = ['glow', 'i2'].includes(slug)
+    const detailPrefix = slug === 'i2' ? 'project-earphone-i2-aplus' : `${prefix}-detail`
+    const detailWorks = makeProductItems(detailPrefix, detailCount, `${title} A+`, 'A+')
+    const splitWorks = slug === 'glow'
       ? Array.from({ length: 7 }, (_, index) => ({
           ...detailWorks[0],
           title: `${title} A+ ${String(index + 1).padStart(2, '0')}`,
@@ -425,7 +426,7 @@ const makeEarphoneProduct = (title, slug, mainCount, detailCount) => {
 }
 
 const earphoneProducts = [
-  { ...makeEarphoneProduct('I2', 'i2', 8, 1), group: 'featured' },
+  { ...makeEarphoneProduct('I2', 'i2', 8, 7), group: 'featured' },
   { ...makeEarphoneProduct('NC01', 'nc01', 10, 6), group: 'featured' },
   { ...makeEarphoneProduct('发光耳机', 'glow', 6, 1), group: 'featured' },
   { ...makeEarphoneProduct('水饺', 'dumpling', 17, 7), cover: '/assets/project-earphone-dumpling-main-05.webp', group: 'featured' },
