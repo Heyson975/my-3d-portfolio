@@ -243,7 +243,7 @@ const toolIcons = [
   { name: 'AIGC', label: 'AI Workflow' },
 ]
 
-const galleryItems = [8, 40, 18, 25, 26, 27, 28, 36, 37].map((number) => {
+const galleryItems = [28, 17, 38, 42, 30, 45, 18, 43, 39].map((number) => {
   const work = folderSceneWorks[number - 1]
   return { image: work.image, label: work.title, slug: work.slug }
 })
@@ -359,17 +359,6 @@ const aromaProducts = [
     cover: '/assets/project-aroma-indoor-main-01.webp',
     description: '室内香薰产品主图与详情页。',
     sections: makeProductSections('project-aroma-indoor', 5, 22515, '室内香薰'),
-  },
-  {
-    title: '其他香薰作品',
-    label: 'Aroma Collection',
-    slug: 'other-aroma',
-    cover: '/assets/flat-scene-40.webp',
-    description: '车载香膏与室内香薰的产品图和场景视觉。',
-    sections: [makeProjectSection('主图', 'Main Visuals', [
-      ...makeWhiteItems([15], '香薰白底图'),
-      ...makeSceneItems([10, 11, 20, 40, 41], '香薰场景图'),
-    ])],
   },
 ]
 
@@ -910,13 +899,18 @@ function ArcGallery({ items, onOpenWork }) {
           const lift = Math.sin(angle)
           const y = -lift * arcHeight
           const scale = 0.74 + lift * 0.22
-          const opacity = 0.34 + lift * 0.62
+          const fadeIn = Math.min(1, progress / 0.18)
+          const fadeOut = Math.min(1, (1 - progress) / 0.18)
+          const edgeFade = Math.min(fadeIn, fadeOut)
+          const smoothFade = edgeFade * edgeFade * (3 - 2 * edgeFade)
+          const opacity = (0.34 + lift * 0.62) * smoothFade
           const rotate = (progress - 0.5) * (isMobile ? 12 : 18)
           const depth = Math.round(10 + lift * 40)
 
           card.style.transform = `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotate}deg) scale(${scale})`
           card.style.opacity = opacity.toFixed(3)
           card.style.zIndex = String(depth)
+          card.style.pointerEvents = opacity < 0.08 ? 'none' : 'auto'
         })
       }
 
