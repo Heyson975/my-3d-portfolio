@@ -1375,9 +1375,11 @@ section {
 .projectDetailHero > p {
   max-width: 560px;
   margin: 0;
+  justify-self: end;
   color: rgba(236, 232, 247, 0.72);
   font-size: 18px;
   line-height: 1.8;
+  text-align: right;
 }
 
 .projectSectionStack {
